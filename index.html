@@ -1,0 +1,142 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <title>libros</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script language="javascript">
+        function doSearch()
+        {
+            const tableReg = document.getElementById('datos');
+            const searchText = document.getElementById('searchTerm').value.toLowerCase();
+            let total = 0;
+ 
+            
+            for (let i = 1; i < tableReg.rows.length; i++) {
+                
+                if (tableReg.rows[i].classList.contains("noSearch")) {
+                    continue;
+                }
+ 
+                let found = false;
+                const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+               
+                for (let j = 0; j < cellsOfRow.length && !found; j++) {
+                    const compareWith = cellsOfRow[j].innerHTML.toLowerCase();
+                   
+                    if (searchText.length == 0 || compareWith.indexOf(searchText) > -1) {
+                        found = true;
+                        total++;
+                    }
+                }
+                if (found) {
+                    tableReg.rows[i].style.display = '';
+                } else {
+                   
+                    tableReg.rows[i].style.display = 'none';
+                }
+            }
+ 
+            const lastTR=tableReg.rows[tableReg.rows.length-1];
+            const td=lastTR.querySelector("td");
+            lastTR.classList.remove("hide", "red");
+            if (searchText == "") {
+                lastTR.classList.add("hide");
+            } else if (total) {
+                td.innerHTML="Se ha encontrado "+total+" coincidencia"+((total>1)?"s":"");
+            } else {
+                lastTR.classList.add("red");
+                td.innerHTML="No se han encontrado coincidencias";
+            }
+        }
+    </script>
+
+  </head>
+  <body>
+   
+  <nav class="navbar bg-dark" data-bs-theme="dark">
+      <div class="container-fluid">
+      <a class="navbar-brand" href="index.php">Home</a>
+      <form class="d-flex">
+        <input class="form-control me-2"  id="searchTerm" type="text" onkeyup="doSearch()">
+        <input class="btn btn-outline-success" type="submit" name="enviar" value="Buscar">
+    </form>
+      </div>
+    </nav>
+    
+    <div class="container-fluid"id="">
+<div class="container text-center">    
+  <h1>Bienvenido a nuestro sitio web</h1>
+  <br>
+  <div class="row">
+  <div class="hov">
+  <div class="container text-center">    
+  <h3>Realice su descarga del libro deseado</h3>
+  <br>
+</div>
+
+
+    <table class="table" id="datos">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">imagen</th>
+      <th scope="col">Descarga</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>You</td>
+      <td>You es una novela de suspenso de Caroline Kepnes, publicada en septiembre de 2014</td>
+      <td>Suspenso</td>
+      <td><img src="Img/you.PNG" width="200" height="200" alt="" srcset="" ></td>
+      <td> <a class="btn btn-primary"  href="Libros/You-Caroline-kepnes.pdf" download="you.pdf" >Descarga</a> </td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>100 años de soledad</td>
+      <td>Cien años de soledad es una novela del escritor colombiano Gabriel García Márquez</td>
+      <td>Novela</td>
+      <td><img src="Img/100.jpg" width="200" height="200" alt="" srcset="">
+      <td> <a  class="btn btn-primary" href="Libros/Garcia_Marquez,_Gabriel_Cien_años_de_soledad.pdf" download="100-años-de-soledad.pdf" >Descarga</a> </td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Buscando a Alaska</td>
+      <td>Buscando a Alaska es la primera novela escrita por el estadounidense John Green. La misma, es una novela juvenil publicada en marzo de 2005.</td>
+      <td>Novela</td>
+      <td><img src="Img/Buscando_A_Alaska.jpg" width="200" height="200" alt="" srcset="">
+      <td> <a  class="btn btn-primary" href="Libros/Buscando a Alaska.pdf" download="Buscando-a-alaska.pdf" >Descarga</a> </td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Veronica Decide morir</td>
+      <td>Esta edición pretende ser una guía práctica y completa para los maestros, educadores y alumnos que deseen profundizar en la reflexión que suscita la obra sobre temas como la libertad, la sexualidad o la locura </td>
+      <td>Novela psicológica</td>
+      <td><img src="Img/0_KEi5o6kwcQdA11Ld.jpg" width="200" height="200" alt="" srcset="">
+      <td> <a  class="btn btn-primary" href="Libros/Verónica decide morir.pdf" download="veronica-decide-morir.pdf" >Descarga</a> </td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>El elemento</td>
+      <td>El libro que ha revolucionado el campo de la creatividad, la innovación y el aprendizaje</td>
+      <td>Autoayuda</td>
+      <td><img src="Img/descubrir.PNG" width="200" height="200" alt="" srcset="" ></td>
+      <td> <a class="btn btn-primary"  href="Libros/elemento.pdf" download="el-elemento.pdf" >Descarga</a> </td>
+      </tr>
+      <tr class='noSearch hide'>
+                <td colspan="5"></td>
+            </tr>
+  </tbody>
+</table>
+
+  </body>
+</html>
